@@ -5,7 +5,7 @@ export ZSH=/Users/nova/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="avit"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +45,8 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx gem svn brew bower gradle grunt npm mvn tmux grails)
+fpath=(/usr/local/share/zsh-completions $fpath)
+plugins=(git osx gem svn brew bower gradle grunt npm mvn grails meteor jenv brew-cask springboot )
 
 # User configuration
 
@@ -64,10 +65,15 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_HOME/tools:$A
 GRADLE_HOME="/usr/local/Cellar/gradle/2.3/libexec"
 export GRADLE_HOME
 
+export GROOVY_HOME="/usr/local/opt/groovy/libexec"
+
+# set homebrew unauto update
+export HOMEBREW_NO_AUTO_UPDATE=true
+
 source $ZSH/oh-my-zsh.sh
 
 # set npm completion
-. <(npm completion)
+#. <(npm completion)
 
 # set vi model
 set -o vi
@@ -78,9 +84,7 @@ set -o vi
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# else #   export EDITOR='mvim' # fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -102,6 +106,7 @@ alias zshsource="source ~/.zshrc"
 alias vimconfig="mvim ~/.vimrc"
 alias vimsource="source ~/.vimrc"
 alias ohmyzsh="mvim ~/.oh-my-zsh"
+alias notes="mvim -c Geeknote"
 alias cls='clear'
 alias grep='grep --color=auto'
 alias -s html=mvim # 在命令行直接输入后缀为html的文件名，会在MacVim中打开
@@ -113,6 +118,13 @@ alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 alias blog='tmux a -t blog -d'
+alias three='vim /Users/nova/JD/three/temp.md'
+alias week='vim /Users/nova/JD/three/week.md'
+alias aria2rpc='aria2c --conf-path=/Users/nova/Documents/aria2.conf -D'
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/nova/.gvm/bin/gvm-init.sh" ]] && source "/Users/nova/.gvm/bin/gvm-init.sh"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+

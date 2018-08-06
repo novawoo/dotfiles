@@ -64,7 +64,7 @@ endif
 "Color Settings {
 set colorcolumn=85           "彩色显示第85行
 set t_Co=256                 "设置256色显示
-set background=dark  "light          "使用color solarized
+set background=dark "dark light          "使用color solarized
 set cmdheight=2              "设置命令行的高度为2，默认为1
 set cursorline               "设置光标高亮显示
 set cursorcolumn             "光标垂直高亮
@@ -88,6 +88,10 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+"}
+
+"history setting {
+set history=200
 "}
 
 " -----------------------------------------------------------------------------
@@ -127,9 +131,11 @@ autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要
 "set relativenumber                           "相对行号 要想相对行号起作用要放在显示行号后面
 set wrap                                      "自动换行
 if(g:iswindows)
-	set guifont=YaHei_Consolas_Hybrid:h18                 "设置字体:字号（字体名称空格用下划线代替）
+	"set guifont=YaHei_Consolas_Hybrid:h18                 "设置字体:字号（字体名称空格用下划线代替）
+	set guifont=source_code_pro:h16                 "设置字体:字号（字体名称空格用下划线代替）
 else
-	set guifont=楷体:h16                    "GUI界面里的字体，默认有抗锯齿
+	"set guifont=楷体:h16                    "GUI界面里的字体，默认有抗锯齿
+	set guifont=source_code_pro:h16                 "设置字体:字号（字体名称空格用下划线代替）
 endif
 
 set isk+=-                                     "将-连接符也设置为单词
@@ -141,10 +147,10 @@ set showmatch             "显示括号对应
 set hlsearch              "高亮显示搜索结果
 set incsearch             "实时显示搜索结果
 
-set numberwidth=4          "行号栏的宽度
-set columns=100           "初始窗口的宽度
-set lines=60              "初始窗口的高度
-winpos 350 10             "初始窗口的位置
+"set numberwidth=4          "行号栏的宽度
+"set columns=100           "初始窗口的宽度
+"set lines=60              "初始窗口的高度
+"winpos 350 10             "初始窗口的位置
 
 set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
 
@@ -162,6 +168,10 @@ inoremap <c-j> <down>
 inoremap <c-k> <up>
 inoremap <c-l> <right>
 inoremap <c-h> <left>
+
+"使得<c-p><c-n>在命令行模式下有<up><down>同样的功能
+cnoremap <c-p> <up>
+cnoremap <c-n> <down>
 
 "===================================================
 "修改leader键为逗号
@@ -254,26 +264,26 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'ctrlp.vim'
-Bundle 'AutoClose'
-Bundle 'matchit.zip'
-Bundle 'Tabular'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'ctrlp.vim'
+Plugin 'AutoClose'
+Plugin 'matchit.zip'
+Plugin 'Tabular'
 "Bundle 'Valloric/YouCompleteMe'
-Bundle 'spiiph/vim-space'
-Bundle 'trailing-whitespace'
+Plugin 'spiiph/vim-space'
+Plugin 'trailing-whitespace'
 
-Bundle '_jsbeautify'
+Plugin '_jsbeautify'
 nnoremap <leader>_ff :call g:Jsbeautify()<CR>
 
-Bundle 'EasyMotion'
+Plugin 'EasyMotion'
 let g:EasyMotion_leader_key = '<Leader><Leader>'
 
 "Fencview的初始设置
-Bundle 'FencView.vim'
+Plugin 'FencView.vim'
 let g:fencview_autodetect=1
 
-Bundle 'The-NERD-tree'
+Plugin 'The-NERD-tree'
 "设置相对行号
 nmap <leader>nt :NERDTree<cr>:set rnu<cr>
 let NERDTreeShowBookmarks=1
@@ -283,66 +293,88 @@ let NERDTreeIgnore=['\.$','\~$']
 let NERDTreeShowLineNumbers=1
 let NERDTreeWinPos=1
 
-Bundle 'The-NERD-Commenter'
+Plugin 'The-NERD-Commenter'
 let NERDShutUp=1
 "支持单行和多行的选择，//格式
 map <c-h> ,c<space>
 
-Bundle 'UltiSnips'
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"Bundle 'UltiSnips'
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-Bundle 'Markdown'
-Bundle 'Markdown-syntax'
-let g:vim_markdown_folding_disabled=1
+"Bundle 'Markdown'
+Plugin 'hallison/vim-markdown'
+"Bundle 'Markdown-syntax'
+"let g:vim_markdown_folding_disabled=1
 
-Bundle 'instant-markdown.vim'
-let g:instant_markdown_slow = 1
+Plugin 'msanders/snipmate.vim'
+
+"Bundle 'instant-markdown.vim'
+"let g:instant_markdown_slow = 1
 
 "带折叠双栏树状文本管理
 Bundle 'VOoM'
 let g:voom_ft_modes={'markdown':'markdown','c':'fmr2','cpp':'fmr2'}
 nmap <leader><leader>o :Voom<CR>
 
-Bundle 'TxtBrowser'
-Bundle 'ctags.vim'
+"vim-geeknote vim编辑Evernote中的笔记
+Bundle 'https://github.com/neilagabriel/vim-geeknote'
+
+Plugin 'TxtBrowser'
+Plugin 'ctags.vim'
 let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
-Bundle 'ywtxt'
+Plugin 'ywtxt'
 
-Bundle 'taglist.vim'
+Plugin 'taglist.vim'
 
 "js html 混排格式增强
-Bundle 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 
-Bundle 'sketch.vim'
+Plugin 'sketch.vim'
 
-Bundle 'Indent-Guides'
-let g:indent_guides_guide_size=1
+"Bundle 'Indent-Guides'
+"let g:indent_guides_guide_size=1
 
 Plugin 'rizzatti/dash.vim'
 
 "buffer管理
-Bundle 'fholgado/minibufexpl.vim'
-nmap <Leader>e :MBEOpen<cr>
-nmap <Leader>c :MBEClose<cr>
-nmap <Leader>t :MBEToggle<cr>
-nmap <Leader>f :MBEFocusAll<cr>
+"Plugin 'fholgado/minibufexpl.vim'
+"nmap <Leader>e :MBEOpen<cr>
+"nmap <Leader>c :MBEClose<cr>
+"nmap <Leader>t :MBEToggle<cr>
+"nmap <Leader>f :MBEFocusAll<cr>
 
 "状态栏美化
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+ "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+ let g:airline#extensions#tabline#enabled = 1
+ let g:airline#extensions#tabline#buffer_nr_show = 1
+ "设置切换Buffer快捷键"
+ nnoremap <C-N> :bn<CR>
+ nnoremap <C-P> :bp<CR>
+
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vifm/vifm.vim'
 
 "a Git wrapper so awesome,it should be illegal
-"Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 Plugin 'tpope/vim-surround'
 
 Plugin 'axiaoxin/vim-json-line-format'
 
+"解决normal模式下中文输入法的问题
+"lugin 'CodeFalling/fcitx-vim-osx'
+
+
+"让vim实现类似于iWrite效果的插件
+"Plugin 'junegunn/goyo.vim'
+
 "https://github.com/mattn/emmet-vim
 Plugin 'mattn/emmet-vim'
-let g:user_emmet_expandabbr_key='<Tab>'
+"let g:user_emmet_expandabbr_key='<Tab>'
 let g:user_emmet_settings={
             \'java':{
             \'extends' : 'html'
@@ -378,4 +410,3 @@ filetype plugin indent on    " required
 "放置在Bundle的设置后，防止意外BUG
 filetype plugin indent on                             "启用缩进
 syntax on
-
