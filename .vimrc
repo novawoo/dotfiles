@@ -1,63 +1,3 @@
-" =============================================================================
-"        << 判断操作系统是 Windows 还是 Linux 和判断是终端还是 Gvim >>
-" =============================================================================
-
-" -----------------------------------------------------------------------------
-"  < 判断操作系统是否是 Windows 还是 Linux >
-" -----------------------------------------------------------------------------
-if(has("win32") || has("win64") || has("win95") || has("win16"))
-    let g:iswindows = 1
-else
-    let g:iswindows = 0
-endif
-
-" -----------------------------------------------------------------------------
-"  < 判断是终端还是 Gvim >
-" -----------------------------------------------------------------------------
-if has("gui_running")
-    let g:isGUI = 1
-else
-    let g:isGUI = 0
-endif
-
-" =============================================================================
-"                          << 以下为软件默认配置 >>
-" =============================================================================
-
-" -----------------------------------------------------------------------------
-"  < Windows Gvim 默认配置> 做了一点修改
-" -----------------------------------------------------------------------------
-if (g:iswindows && g:isGUI)
-    source $VIMRUNTIME/vimrc_example.vim
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-    set diffexpr=MyDiff()
-
-    function MyDiff()
-        let opt = '-a --binary '
-        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-        let arg1 = v:fname_in
-        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-        let arg2 = v:fname_new
-        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-        let arg3 = v:fname_out
-        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-        let eq = ''
-        if $VIMRUNTIME =~ ' '
-            if &sh =~ '\<cmd'
-                let cmd = '""' . $VIMRUNTIME . '\diff"'
-                let eq = '"'
-            else
-                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-            endif
-        else
-            let cmd = $VIMRUNTIME . '\diff'
-        endif
-        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-    endfunction
-endif
-
 " -----------------------------------------------------------------------------
 "  < 颜色配置 >
 " -----------------------------------------------------------------------------
@@ -76,11 +16,11 @@ set backspace=indent,eol,start
 "  < 主题配置 >
 " -----------------------------------------------------------------------------
 " 注：主题使用solarized
-colorscheme solarized "desert 
-let g:solarized_termtrans  = 1
-let g:solarized_termcolors = 256
-let g:solarized_contrast   = "high"
-let g:solarized_visibility = "high"
+colorscheme monokai
+"let g:solarized_termtrans  = 1
+"let g:solarized_termcolors = 256
+"let g:solarized_contrast   = "high"
+"let g:solarized_visibility = "high"
 "}
 
 "tab setting {
@@ -109,14 +49,6 @@ set encoding=utf-8				"设置gvim内部编码
 set fileformat=unix                                   "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac                          "给出文件的<EOL>格式类型
 
-if (g:iswindows && g:isGUI)
-    "解决菜单乱码
-    source $VIMRUNTIME/delmenu.vim
-    source $VIMRUNTIME/menu.vim
-
-    "解决consle输出乱码
-    language messages zh_CN.utf-8
-endif
 
 " -----------------------------------------------------------------------------
 "  < 界面配置 >
@@ -130,13 +62,6 @@ autocmd! bufwritepost _vimrc source %         "自动载入配置文件不需要
 
 "set relativenumber                           "相对行号 要想相对行号起作用要放在显示行号后面
 set wrap                                      "自动换行
-if(g:iswindows)
-	"set guifont=YaHei_Consolas_Hybrid:h18                 "设置字体:字号（字体名称空格用下划线代替）
-	set guifont=source_code_pro:h16                 "设置字体:字号（字体名称空格用下划线代替）
-else
-	"set guifont=楷体:h16                    "GUI界面里的字体，默认有抗锯齿
-	set guifont=source_code_pro:h16                 "设置字体:字号（字体名称空格用下划线代替）
-endif
 
 set isk+=-                                     "将-连接符也设置为单词
 
@@ -230,14 +155,6 @@ set guioptions-=T
 "去除左右两边的滚动条
 set go-=r
 set go-=L
-
-map <silent> <F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
 
 "Indent Guides设置
 "let g:indent_guides_guide_size=1
@@ -364,6 +281,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
 Plugin 'axiaoxin/vim-json-line-format'
+
+"monokai theme
+Plugin 'sickill/vim-monokai'
 
 "解决normal模式下中文输入法的问题
 "lugin 'CodeFalling/fcitx-vim-osx'
