@@ -6,7 +6,7 @@
 set t_Co=256                 "设置256色显示
 set cmdheight=2              "设置命令行的高度为2，默认为1
 set cursorline               "设置光标高亮显示
-set cursorcolumn             "光标垂直高亮
+"set cursorcolumn             "光标垂直高亮
 set ttyfast
 set ruler                    "状态栏显示光标位置
 set backspace=indent,eol,start
@@ -16,7 +16,7 @@ set backspace=indent,eol,start
 " -----------------------------------------------------------------------------
 " 注：主题使用solarized
 " colorscheme monokai
-colorscheme molokai
+" colorscheme molokai
 "set background=dark "dark light          "使用color solarized
 "let g:solarized_termtrans  = 1
 "let g:solarized_termcolors = 256
@@ -286,7 +286,7 @@ Plugin 'tpope/vim-surround'
 "Plugin 'axiaoxin/vim-json-line-format'
 
 "monokai theme
-Plugin 'sickill/vim-monokai'
+Plugin 'patstockwell/vim-monokai-tasty'
 
 "解决normal模式下中文输入法的问题
 "lugin 'CodeFalling/fcitx-vim-osx'
@@ -329,6 +329,11 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 "}
+
+
+colorscheme vim-monokai-tasty
+let g:airline_theme='monokai_tasty'
+
 
 "放置在Bundle的设置后，防止意外BUG
 filetype plugin indent on                             "启用缩进
