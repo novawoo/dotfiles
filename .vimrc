@@ -2,9 +2,8 @@
 "  < 颜色配置 >
 " -----------------------------------------------------------------------------
 "Color Settings {
-set colorcolumn=85           "彩色显示第85行
+"set colorcolumn=85           "彩色显示第85行
 set t_Co=256                 "设置256色显示
-set background=dark "dark light          "使用color solarized
 set cmdheight=2              "设置命令行的高度为2，默认为1
 set cursorline               "设置光标高亮显示
 set cursorcolumn             "光标垂直高亮
@@ -16,7 +15,9 @@ set backspace=indent,eol,start
 "  < 主题配置 >
 " -----------------------------------------------------------------------------
 " 注：主题使用solarized
-colorscheme monokai
+" colorscheme monokai
+colorscheme molokai
+"set background=dark "dark light          "使用color solarized
 "let g:solarized_termtrans  = 1
 "let g:solarized_termcolors = 256
 "let g:solarized_contrast   = "high"
@@ -71,6 +72,8 @@ set smartcase
 set showmatch             "显示括号对应
 set hlsearch              "高亮显示搜索结果
 set incsearch             "实时显示搜索结果
+
+set guifont=Consolas:h16,苹方-简:h14
 
 "set numberwidth=4          "行号栏的宽度
 "set columns=100           "初始窗口的宽度
@@ -236,7 +239,7 @@ let g:voom_ft_modes={'markdown':'markdown','c':'fmr2','cpp':'fmr2'}
 nmap <leader><leader>o :Voom<CR>
 
 "vim-geeknote vim编辑Evernote中的笔记
-Bundle 'https://github.com/neilagabriel/vim-geeknote'
+"Bundle 'https://github.com/neilagabriel/vim-geeknote'
 
 Plugin 'TxtBrowser'
 Plugin 'ctags.vim'
@@ -280,7 +283,7 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'tpope/vim-surround'
 
-Plugin 'axiaoxin/vim-json-line-format'
+"Plugin 'axiaoxin/vim-json-line-format'
 
 "monokai theme
 Plugin 'sickill/vim-monokai'
